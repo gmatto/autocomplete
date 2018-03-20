@@ -1,0 +1,26 @@
+<div class="autocomplete-label" data-ng-click="closeMenu()">
+    <span class="hint" data-ng-if="hint" data-ng-bind="hint"></span>
+    <span class="autocomplete-title" data-ng-bind="title"></span>
+</div>
+<div class="autocomplete-label">
+    <input data-ng-model="$parent.model" data-ng-change="dataChange()" placeholder="{{placevalue}}"
+           data-ng-keydown="keyDown($event)" tabindex="{{ tabindex }}" data-ng-disabled="disabled"
+           data-ng-focus="openMenu()" data-ng-click="openMenu()" data-ng-model-options="{ debounce: 500 }" data-ng-blur="restoreSaved()" />
+    <span class="error" data-ng-if="errors[field] != null" data-ng-bind="errors[field]"></span>
+    <button data-ng-show="loaded" data-ng-click="toggleSelect()" tabindex="-1" class="glyphicon" data-ng-disabled="disabled"
+            data-ng-class="{ 'glyphicon-hand-down' : !isPopupVisible, 'glyphicon-hand-up' : isPopupVisible }"></button>
+    <div class="glyphicon loading" data-ng-show="!loaded"><loading></loading></div>
+</div>
+<ul class="popup lazyscroll" data-ng-show="isPopupVisible && (source.length > 0 || errorMsg)" data-ng-init="initLazyLoadOnScroll()">
+    <li class="item" data-ng-class="{ active: selected == $index && isPopupVisible }"
+        data-ng-repeat="item in source | limitTo: 50 track by $index" data-ng-bind="item.input"
+        data-ng-click="select(item)">
+    </li>
+    <li class="item error" data-ng-bind="errorMsg" data-ng-if="failed"></li>
+    <li class="loading" data-ng-if="lazyload == 'scroll' && !lazyDataLoaded"  data-ng-show="totalitems && source.length < totalitems || source.length < total">
+        <loading></loading></li>
+    <button class="btn btn-xs btn-primary" data-ng-keydown="keyDown($event)" data-ng-class="{ active: selected == source.length }"
+            ng-disabled="!lazyDataLoaded" data-ng-click="loadMore()" data-ng-if="lazyload && lazyload != 'scroll'" data-ng-show="totalitems && source.length < totalitems || source.length < total">
+        <span>{{lazyDataLoaded ? 'Загрузить еще...' : 'Идет загрузка...'}}</span>
+    </button>
+</ul>

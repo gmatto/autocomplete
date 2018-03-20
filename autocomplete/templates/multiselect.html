@@ -1,0 +1,21 @@
+<div class="multiselect">
+    <label>
+        <span class="title" data-ng-bind="title" data-ng-click="toggleSelect()"></span>
+        <textarea class="button" data-ng-bind="text" data-ng-click="toggleSelect()" data-ng-keydown="keyDown($event)" readonly></textarea>
+    </label>
+    <ul class="popup" data-ng-show="isPopupVisible">
+        <div class="loading" ng-if="!loaded && (mode != 'static' || mode == 'static' && !source.length)"><loading></loading><p>Пожалуйста, подождите! Идет загрузка...</p></div>
+        <div class="select-options lazyscroll fromnewline" ng-if="loaded || !loaded && mode == 'static' && source.length > 0" data-ng-init="initLazyLoadOnScroll()">
+            <li class="item" data-ng-class="{checked: getSelectedIndex(item) > -1, active: selected == $index && isPopupVisible }" data-ng-model="item.input"
+            data-ng-repeat="item in source track by $index" data-ng-bind="item.input" data-ng-click="select(item)" data-ng-keydown="keyDown($event)">
+            </li>
+            <li class="item error" data-ng-bind="errorMsg" data-ng-if="failed"></li>
+            <li class="loading" data-ng-if="lazyload == 'scroll' && !lazyDataLoaded"  data-ng-show="totalitems && source.length < totalitems || source.length < total">
+                <loading></loading></li>
+            <button class="btn btn-xs btn-primary" data-ng-keydown="keyDown($event)" data-ng-class="{ active: selected == source.length }" ng-disabled="!lazyDataLoaded"
+                    data-ng-click="loadMore()" data-ng-if="lazyload && lazyload != 'scroll'" data-ng-show="totalitems && source.length < totalitems || source.length < total">
+                <span>{{lazyDataLoaded ? 'Загрузить еще...' : 'Идет загрузка...'}}</span>
+            </button>
+        </div>
+    </ul>
+</div>
