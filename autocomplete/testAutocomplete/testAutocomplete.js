@@ -134,6 +134,12 @@ app.controller('testAutocompleteCtrl', ['$scope', '$q', function ($scope, $q) {
             $scope.userForm.models[key] = sampleSavedModels[key];
         }
 
+        $scope.activeTab = 1;
+        $scope.setActive = (index) => {
+            if (index == null) return;
+            $scope.activeTab = index;
+        };
+
         $scope.invalidateText = 'Invalidate all';
         $scope.disableText = 'Disable all';
 
