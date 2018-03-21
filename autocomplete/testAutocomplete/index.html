@@ -3,9 +3,380 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="//rawgit.com/gmatto/autocomplete/master/autocomplete/autocomplete.css">
+    <script src="//rawgit.com/gmatto/autocomplete/master/autocomplete/testAutocomplete/testAutocomplete.js"></script>
     <script src="//rawgit.com/gmatto/autocomplete/master/autocomplete/selectAutocomplete.js"></script>
-    <script src="//rawgit.com/gmatto/autocomplete/master/autocomplete/testAutocomplete.js"></script>
 </head>
-<body ng-app="testAutocompleteApp" ng-include="">
+<body ng-app="testAutocompleteApp">
+
+<h1>Test Autocomplete</h1>
+<div ng-controller="testAutocompleteCtrl">
+    <div class="line">
+        <div class="buttons">
+            <button data-ng-click="setActive(1)"
+                    data-ng-class="{ active: activeTab == 1 }"
+                    tabindex="101"
+                    data-ng-disabled="sent">
+                Шаблон <b>"single"</b>
+            </button>
+            <button data-ng-click="setActive(2)"
+                    data-ng-class="{ active: activeTab == 2 }"
+                    tabindex="102"
+                    data-ng-disabled="sent">
+                Шаблон <b>"singleselect"</b>
+            </button>
+        </div>
+    </div>
+    <div class="tabs">
+        <div class="tab" data-ng-show="activeTab == 1">
+    <div data-select-autocomplete
+         title="Static:"
+         mode="static"
+         class="is-required"
+         data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+         tabindex="25"
+         data-ng-disabled="sent"
+         data-src="getDictionarySingle(const.THEME, 'tab1_st1')"
+         data-model="userForm.models.tab1_st1"
+         data-errors="errors"
+         data-field="theme"
+         data-item="userForm.items.tab1_st1"
+         data-placeholder="Выберите из списка">
+    </div>
+    <div data-select-autocomplete
+         title="Dynamic:"
+         class="is-required zero"
+         data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+         tabindex="26"
+         data-ng-disabled="sent"
+         data-src="getDictionarySingle(const.HISTORICAL, 'tab1_dn1' )"
+         data-model="userForm.models.tab1_dn1"
+         data-errors="errors"
+         data-field="historical"
+         data-item="userForm.items.tab1_dn1"
+         data-placeholder="Выберите из списка">
+    </div>
+    <div data-select-autocomplete
+         title="Static with button scroll:"
+         mode="static"
+         data-limit="10"
+         data-lazyload="true"
+         class="is-required"
+         data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+         tabindex="21"
+         data-ng-disabled="sent"
+         data-src="getDictionarySingle(const.GENRE, 'tab1_st2')"
+         data-model="userForm.models.tab1_st2"
+         data-item="userForm.items.tab1_st2"
+         data-errors="errors"
+         data-field="genre"
+         data-placeholder="Выберите из списка">
+    </div>
+    <div data-select-autocomplete
+         title="Dynamic with button scroll:"
+         class="is-required zero"
+         data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+         tabindex="22"
+         data-lazyload="true"
+         data-start="userForm.start.tab1_dn2"
+         data-total="getTotal('tab1_dn2')"
+         data-ng-disabled="sent"
+         data-src="getDictionarySingle(const.THEME, 'tab1_dn2', 10)"
+         data-model="userForm.models.tab1_dn2"
+         data-errors="errors"
+         data-field="age"
+         data-item="userForm.items.tab1_dn2"
+         data-placeholder="Выберите из списка">
+    </div>
+    <div data-select-autocomplete
+         title="Static with autoscroll:"
+         mode="static"
+         data-limit="10"
+         data-lazyload="scroll"
+         class="is-required"
+         data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+         tabindex="27"
+         data-ng-disabled="sent"
+         data-src="getDictionarySingle(const.THEME, 'tab1_st3')"
+         data-model="userForm.models.tab1_st3"
+         data-errors="errors"
+         data-field="social"
+         data-item="userForm.items.tab1_st3"
+         data-placeholder="Выберите из списка">
+    </div>
+    <div data-select-autocomplete
+         title="Dynamic with autoscroll:"
+         data-lazyload="scroll"
+         data-start="userForm.start.tab1_dn3"
+         data-total="getTotal('tab1_dn3')"
+         class="is-required zero"
+         data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+         tabindex="27"
+         data-ng-disabled="sent"
+         data-src="getDictionarySingle(const.THEME, 'tab1_dn3', 10)"
+         data-model="userForm.models.tab1_dn3"
+         data-errors="errors"
+         data-field="social"
+         data-item="userForm.items.tab1_dn3"
+         data-placeholder="Выберите из списка">
+    </div>
+    <div data-select-autocomplete
+         title="Static with query saving:"
+         mode="static"
+         allow-new-models="true"
+         class="is-required"
+         data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+         tabindex="25"
+         data-ng-disabled="sent"
+         data-src="getDictionarySingle(const.THEME, 'tab1_st4')"
+         data-model="userForm.models.tab1_st4"
+         data-errors="errors"
+         data-field="theme"
+         data-item="userForm.items.tab1_st4"
+         data-placeholder="Выберите из списка">
+    </div>
+    <div data-select-autocomplete
+         title="Dynamic with query saving:"
+         allow-new-models="true"
+         class="is-required zero"
+         data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+         tabindex="26"
+         data-ng-disabled="sent"
+         data-src="getDictionarySingle(const.HISTORICAL, 'tab1_dn4' )"
+         data-model="userForm.models.tab1_dn4"
+         data-errors="errors"
+         data-field="historical"
+         data-item="userForm.items.tab1_dn4"
+         data-placeholder="Выберите из списка">
+    </div>
+        </div>
+        <div class="tab" data-ng-show="activeTab == 2">
+            <div data-select-autocomplete
+                 title="Static:"
+                 mode="static"
+                 simplified="true"
+                 template="singleselect"
+                 id="nationalField"
+                 class="is-required"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="23"
+                 data-ng-disabled="sent"
+                 data-src="getDictionarysingleselect(const.NATIONAL, 'tab2_st1')"
+                 data-model="userForm.models.tab2_st1"
+                 data-errors="errors"
+                 data-field="national"
+                 data-item="userForm.items.tab2_st1"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Dynamic:"
+                 simplified="true"
+                 template="singleselect"
+                 class="is-required zero"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_dn1')"
+                 data-model="userForm.models.tab2_dn1"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_dn1"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Static with live search:"
+                 mode="static"
+                 simplified="true"
+                 template="singleselect"
+                 class="is-required"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-autosearch="true"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_st2')"
+                 data-model="userForm.models.tab2_st2"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_st2"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Dynamic with live search:"
+                 template="singleselect"
+                 simplified="true"
+                 class="is-required zero"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-autosearch="true"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_dn2')"
+                 data-model="userForm.models.tab2_dn2"
+                 data-query="userForm.query.tab2_dn2"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_dn2"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Static with button scroll:"
+                 mode="static"
+                 template="singleselect"
+                 simplified="true"
+                 class="is-required"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-limit="15"
+                 data-lazyload="true"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_st3')"
+                 data-model="userForm.models.tab2_st3"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_st3"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Dynamic with button scroll:"
+                 template="singleselect"
+                 simplified="true"
+                 class="is-required zero"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-lazyload="true"
+                 data-start="userForm.start.tab2_dn3"
+                 data-total="getTotal('tab2_dn3')"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_dn3', 10)"
+                 data-model="userForm.models.tab2_dn3"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_dn3"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Static with autoscroll:"
+                 mode="static"
+                 template="singleselect"
+                 simplified="true"
+                 class="is-required"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-limit="15"
+                 data-lazyload="scroll"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_st4')"
+                 data-model="userForm.models.tab2_st4"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_st4"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Dynamic with autoscroll:"
+                 template="singleselect"
+                 simplified="true"
+                 class="is-required zero"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-lazyload="scroll"
+                 data-start="userForm.start.tab2_dn4"
+                 data-total="getTotal('tab2_dn4')"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_dn4', 10)"
+                 data-model="userForm.models.tab2_dn4"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_dn4"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Static with live search and button scroll:"
+                 mode="static"
+                 template="singleselect"
+                 simplified="true"
+                 class="is-required"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-limit="15"
+                 data-lazyload="true"
+                 data-autosearch="true"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_st5')"
+                 data-model="userForm.models.tab2_st5"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_st5"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Dynamic with live search and button scroll:"
+                 template="singleselect"
+                 simplified="true"
+                 class="is-required zero"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-lazyload="true"
+                 data-start="userForm.start.tab2_dn5"
+                 data-total="getTotal('tab2_dn5')"
+                 data-autosearch="true"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_dn5', 10)"
+                 data-model="userForm.models.tab2_dn5"
+                 data-query="userForm.query.tab2_dn5"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_dn5"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Static with live search and autoscroll:"
+                 mode="static"
+                 template="singleselect"
+                 simplified="true"
+                 class="is-required"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-limit="15"
+                 data-lazyload="scroll"
+                 data-autosearch="true"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_st6')"
+                 data-model="userForm.models.tab2_st6"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_st6"
+                 data-placeholder="Выберите из списка">
+            </div>
+            <div data-select-autocomplete
+                 title="Dynamic with live search and autoscroll:"
+                 template="singleselect"
+                 simplified="true"
+                 class="is-required zero"
+                 data-ng-class="{ invalid: invalidateText == 'Validate all', disabled: disableText == 'Enable all' }"
+                 tabindex="24"
+                 data-ng-disabled="sent"
+                 data-autosearch="true"
+                 data-lazyload="scroll"
+                 data-start="userForm.start.tab2_dn6"
+                 data-total="getTotal('tab2_dn6')"
+                 data-src="getDictionarysingleselect(const.LANGUAGE, 'tab2_dn6', 10)"
+                 data-model="userForm.models.tab2_dn6"
+                 data-query="userForm.query.tab2_dn6"
+                 data-errors="errors"
+                 data-field="language"
+                 data-item="userForm.items.tab2_dn6"
+                 data-placeholder="Выберите из списка">
+            </div>
+        </div>
+        <div class="fromnewline"></div>
+        <hr>
+        <div>
+            <button class="btn btn-secondary" data-ng-click="clear()">Очистить все</button>
+            <button class="btn btn-secondary" data-ng-click="invalidate()">{{invalidateText}}</button>
+            <button class="btn btn-secondary" data-ng-click="disable()">{{disableText}}</button>
+        </div>
+        <div class="fromnewline"></div>
+        <hr>
+    </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,77 @@
+* {
+    font-size: 1.05rem;
+    padding-bottom: 1rem;
+}
+
+.line {
+    padding: 0 0.6rem;
+    overflow: hidden;
+}
+
+.tabs {
+    padding: 1rem;
+}
+
+.tabs .tab {
+    overflow: hidden;
+}
+
+.buttons {
+    overflow: hidden;
+}
+
+.buttons button {
+    color: #333;
+    background-color: transparent;
+    padding: 0.5rem 0.8rem;
+    display: block;
+    margin-bottom: 0;
+    text-align: center;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    user-select: none;
+    float: left;
+    outline: none;
+}
+
+.buttons button:focus {
+    border-color: #4d90fe;
+}
+
+.buttons button:first-child {
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.buttons button:last-child {
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.buttons.bottom button {
+    border-radius: 0.5rem;
+}
+
+.buttons button {
+    width: 25%;
+}
+
+.buttons button:hover {
+    background-color: #d4d4d4;
+    border-color: #8c8c8c;
+}
+
+.buttons button.active {
+    border-color: #2A6682;
+    background-color: #014283;
+    color: white;
+}
+
+.buttons button.active:focus {
+    background-color: #2A6682;
+    border-color: #2A6682;
+}
+
+.buttons button.active:hover {
+    background-color: #2A6682;
+    border-color: #2A6682;
+}
